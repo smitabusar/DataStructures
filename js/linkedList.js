@@ -4,34 +4,37 @@ var Node = function(value, next) {
 }
 
 var LinkedList = function() {
-	this.start = null;
+	this.head = null;
 }
 
+//prints [1 , 2 , 3]
 LinkedList.prototype.print = function() {
-	var temp = this.start;
+	var temp = this.head;
 	var result = "[";
 	while (temp != null) {
 		result += (temp.next !== null) ? (temp.data + " , ") : (temp.data);
-		temp=temp.next;
+		temp = temp.next;
 	}
 	result += "]";
 	return result;
 }
 
+//inserts value at head
 LinkedList.prototype.insert = function(value) {
 	if (value === undefined) {
 		return -2;
 	}
-	var next=this.start;
-	this.start= new Node(value, next);
-	//console.log(this.start);
+	var next = this.head;
+	this.head = new Node(value, next);
+	//console.log(this.head);
 }
 
+//deletes if the given value is found else returns -1
 LinkedList.prototype.delete = function(value) {
 	if (value === undefined) {
 		return -2;
 	}
-	var current = this.start;
+	var current = this.head;
 	var previous = null;
 	var found = false;
 	while (current !== null && !found) {
@@ -46,7 +49,7 @@ LinkedList.prototype.delete = function(value) {
 	//console.log(found,current,previous);
 	if (found) {
 		if (previous === null) {
-			this.start = this.start.next;
+			this.head = this.head.next;
 		} else {
 			previous.next = current.next;
 		}
